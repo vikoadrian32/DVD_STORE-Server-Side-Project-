@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+/* Navigasi */
+.navigasi{
+    display: flex;
+    padding: 15px;
+    position: absolute; 
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 2;
+    backdrop-filter: blur(2px);
+    background: linear-gradient(to right, rgba(0, 0, 0,1),rgba(0, 0, 0,1),rgba(0,0,0,.6),rgba(0,0,0,.6));
+}
+
+.navigasi a {
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 2.5em; /* 2.5 x 16 = 40px */
+    font-weight: bold;
+    font-family: "Jersey 25 Charted", sans-serif;
+    font-weight: 400;
+    font-style:normal;
+    color: rgba(140, 17, 17, 0.863);
+}
+.navigasi div{
+    display: flex;
+    align-items: center;
+}
+.poster h3{
+    /* margin-top: 20px; */
+    color: wheat;
+    margin-top: 20px; 
+}
+
+#search{
+    width: 400px;
+    height: 35px;
+    text-align: center;
+    font-size: 1.2em;
+    border: 1px solid grey;
+    color: white;
+    outline: none;
+    border-radius: 10px;
+    background:transparent;
+    display:none;  /* 'None' Agar Search Bar Tidak Terlihat Sebelum icon Search Di klik */
+    
+}
+.closeBtn{
+    background: none;
+    border: none; 
+    font-size: 2em; /*element button tidak berada dalam div sedangkan element a berada di dalam nav oleh
+    karna itu font size relatif terhadap parent nya (em) sehingga 2 x 16(nilai default) =  32 px*/
+    margin: 0 20px;
+    cursor: pointer;
+    display:none;
+}
+.searchBtn{
+    background: none;
+    border: none; 
+    font-size: 2em;
+    margin: 0 20px;
+    cursor: pointer;
+}
+input[type="search"]::-webkit-search-cancel-button{
+    display: none;
+}
+/* End Navigasi */
+
+/* Carousel Slide */
+.detail{
+    position: absolute;
+    z-index: 1000;
+    top:40vmin;
+    line-height: 2.2em;
+    left: 8vw;
+    font-weight: bold;
+    color: rgb(218, 206, 206);
+}
+.detail h2{
+    font-size:5vmin;
+    font-weight: bold;
+}
+.detail p{
+    font-size: 4vmin;
+}
+.detail  p.sinopsis{
+    width:450px;
+    max-height: 45px;
+    overflow: hidden;
+    font-size: 1em;
+    line-height: 1em;
+    font-weight: 500;
+    transition: max-height 0.3s ease;
+}
+
+.detail button{
+    border: none;
+    outline: none;
+    background: transparent;
+    text-decoration: underline;
+    color: white;
+    font-size: 20px;
+}
+.imdb{
+    background-color: honeydew; 
+    color: black; 
+    border-radius: 5px; 
+    padding: .3em .4em;
+}
+/* End Carousel Slide */
+
+/* Poster Movie */
+.posterImg{
+    display: grid;
+    grid-template-columns: repeat(5,3fr);
+    gap: 10px;
+    position: relative;
+    padding: 30px;
+    overflow: hidden;
+}
+.posterImg img{
+    width:35vmin;
+    text-align: center;
+    margin: 10px;
+    filter: brightness(55%);
+}
+.posterImg p{
+    position: absolute;
+    top: 85%;
+    left: 47%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 85%;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+.image{
+    position: relative;
+    display: flex;
+}
+
+.posterImg a:hover{
+    transform: scale(1.3);
+    transition: 0.3s ease-out;
+    z-index: 200;
+}
+
+.posterImg img:hover{
+    filter: brightness(80%);
+}
+
+
+
+
+
+@media  (min-width:300px) and (max-width:500px){
+    .navigasi{
+        padding: 5px;
+        position: relative;
+        background: black;
+    }
+    .navigasi a{
+        font-size: 1.5em;
+    }
+   #search{
+    width: 200px;
+    height: 30px;
+    font-size: 1em;
+   }
+   .searchBtn, .closeBtn{
+    margin: 0 10px;
+   }
+
+   .detail{
+    position: absolute;
+    z-index: 1000;
+    top:8vmin ;
+    line-height: .6em;
+    }
+
+    .detail h2{
+        font-size: 3.5vmin;
+        width: 50%;
+    }
+    .imdb{
+        font-size: 1.9vmin;
+    }
+    .detail p{
+        font-size: 70%;
+        margin-top: 10px;
+    }
+    .detail p.sinopsis{
+        /* margin-top: 2px; */
+        font-size: 2vmin;
+        width: 40vmax;
+        max-height: 6vmin;
+    }
+    /* #sinopsis.full {
+        max-height:  10vmin;
+    } */
+    .detail button{
+        font-size: 2vmax;
+    }
+    .posterImg{
+        grid-template-columns: repeat(2,1fr);
+        padding: 5px 30px;
+    }
+  
+    .posterImg p{
+        top: 80%;
+        left: 50%;
+        font-size: 15px;
+        width: 70%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    .posterImg a:hover{
+        transform: none;
+    }
+    .posterImg img:hover{
+        filter: brightness(60%);
+    }
+   
+   
+
+}

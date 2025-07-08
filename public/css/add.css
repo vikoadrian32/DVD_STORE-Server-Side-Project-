@@ -1,0 +1,188 @@
+*,html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+
+.navigasi{
+    display: flex;
+    padding: 15px;
+    /* position: relative; */
+    align-items: center;
+    justify-content: space-between;
+    z-index: 2;
+    backdrop-filter: blur(2px);
+    background: linear-gradient(to right, rgba(0, 0, 0,1),rgba(0, 0, 0,1),rgba(0,0,0,.6),rgba(0,0,0,.6));
+}
+
+.navigasi a {
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 2.5em; /* 2.5 x 16 = 40px */
+    font-weight: bold;
+    font-family: "Jersey 25 Charted", sans-serif;
+    font-weight: 400;
+    font-style:normal;
+    color: rgba(140, 17, 17, 0.863);
+}
+.navigasi div{
+    display: flex;
+    align-items: center;
+}
+.poster h3{
+    /* margin-top: 20px; */
+    color: wheat;
+    margin-top: 20px; 
+}
+
+#search{
+    width: 400px;
+    height: 35px;
+    text-align: center;
+    font-size: 1.2em;
+    border: 1px solid grey;
+    color: white;
+    outline: none;
+    border-radius: 10px;
+    background:transparent;
+    display:none;  /* 'None' Agar Search Bar Tidak Terlihat Sebelum icon Search Di klik */
+    
+}
+.closeBtn{
+    background: none;
+    border: none; 
+    font-size: 2em; /*element button tidak berada dalam div sedangkan element a berada di dalam nav oleh
+    karna itu font size relatif terhadap parent nya (em) sehingga 2 x 16(nilai default) =  32 px*/
+    margin: 0 20px;
+    cursor: pointer;
+    display:none;
+}
+.searchBtn{
+    background: none;
+    border: none; 
+    font-size: 2em;
+    margin: 0 20px;
+    cursor: pointer;
+}
+input[type="search"]::-webkit-search-cancel-button{
+    display: none;
+}
+.title_movie{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 65%;
+}
+ .video_controls{
+    display: flex;
+    justify-content: start;
+    padding: 0 20px;
+    align-items: center;
+    position: relative;
+    /* width: 100%; */
+} 
+.video_controls video{
+    width: 800px;
+    object-fit: cover;
+   
+}
+.box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn{
+    position: absolute;
+    top: 20%;
+    /* left: 15%; */
+    transform: translate(0%,-20%);
+}
+ #btn_play{
+    /* display: none; */
+    font-size: 60px;
+    border: none;
+    outline: none;
+    width: 800px;
+    min-height: 400px;
+    max-height: 480px;
+ 
+}
+#btn_pause {
+    display: none;
+    font-size: 60px;
+    width: 800px;
+    border: none;
+    outline: none;
+    min-height: 400px;
+    max-height: 480px;
+}
+
+.detail{
+    color: white;
+    margin-top: 100px;
+    background: rgb(26, 24, 24);
+    padding: 20px;
+}
+.sinopsis{
+    padding : 0 10px; 
+    width : 75%;
+    transition: max-height 0.3s ease;
+}
+
+.btnDetail{
+    border: none;
+    outline: none;
+    background: transparent;
+    text-decoration: underline;
+    color: white;
+    font-size: 15px;
+    padding: 0 10px;
+    display: none;
+}
+
+
+@media  (min-width:300px) and (max-width:500px){
+    .video_controls{
+        display: flex;
+        flex-direction: row;
+    }
+    .video_controls video{
+        width: 340px;
+    }
+    .btn{
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        transform: translate(-15.5%,-50%);
+    }
+    #btn_play,#btn_pause{
+        font-size: 30px;
+        width: 340px;
+        min-height: 200px;
+        display: none;
+    }
+    .sinopsis{
+        /* padding: 0 5px; */
+        padding: 0 ;
+        width: 100%;
+        max-height: 100px;
+        overflow: hidden;
+    }
+    .btnDetail{
+        padding: 0;
+        display: inline;
+    }
+    .navigasi a{
+        font-size: 1.5em;
+    }
+    #search{
+        width: 200px;
+        height: 30px;
+        font-size: 1em;
+       }
+       .searchBtn, .closeBtn{
+        margin: 0 10px;
+       }
+}
