@@ -6,6 +6,7 @@ use App\Models\Film;
 use App\Models\Stok;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Cast\Double;
 
 class StokController extends Controller
 {
@@ -24,22 +25,27 @@ class StokController extends Controller
         } else {
             $stok = new Stok();  // create a new one
         }
+        $inputPrice =  str_replace('.', '', $request->price);
+        $price = (double) $inputPrice;
+        
         
         $stok->film_id = $request->films;
         $stok->jumlah = $request->quantity;
+        $stok->price = $price;
         $stok->save();
         return redirect('/stok');
     }
+
     public function update(string $id){
         $stok= DB::table('stoks')->find($id);
         $films = Film::all(['id','title']);
         return view('stok/form',[
             'stoks' => $stok,
             'films'=> $films
-
         ]);
 
     }
+    
     public function delete(Request $request) {
         if ($request->method() == "POST") {
             $stok = Stok::find($request->id)->delete();

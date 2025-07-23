@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('director');
+            $table->string('sinopsis',10000);
             $table->string('duration');
             $table->date('release_date');
-            $table->string('sinopsis',10000);
             $table->timestamps();
         });
     }

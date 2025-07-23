@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StokController;
 use App\Models\Account;
 use App\Models\Film;
@@ -56,22 +57,8 @@ Route::post('/movie/save',[FilmController::class,'save']);
 Route::post('/movie/delete/{id}',[FilmController::class,'delete']);
 Route::get('/film/show/{id}',[FilmController::class,'show']);
 Route::post('/movie/attribute/save',[FilmController::class,'attrAdd']);
-// Route::get('/admin/update/{id}',[FilmController::class,'updateForm']);
 
-
-// Route::get('/genre/update/{id}',[GenreController::class,'update']);
-// Route::post('/genre/save',[GenreController::class,'save']);
-// Route::get('/genre/delete/{id}',[GenreController::class,'delete']);
-// Route::post('/genre/delete/{id}',[GenreController::class,'delete']);
-
-
-// // Route::get('/stok',[StokControole])
-// Route::get('/stok',[StokController::class,'index']);
-// Route::get('/stok/add',[StokController::class,'add']);
-// Route::post('/stok/save',[StokController::class,'save']);
-// Route::get('/stok/update/{id}',[StokController::class,'update']);
-// Route::get('/stok/delete/{id}',[StokController::class,'delete']);
-// Route::post('/stok/delete/{id}',[StokController::class,'delete']);
+Route::post('/order_ticket',[OrderController::class,'orderTicket']);
 
 
 

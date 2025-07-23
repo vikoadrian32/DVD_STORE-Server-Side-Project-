@@ -23,10 +23,12 @@
         <a href="/home">MyMovie</a>
         <div>
             <input type="search" placeholder="Search " id="search">
-            <button class="searchBtn" ><i class='bx bx-search-alt' style='color:#f3e7e7'></i></button>
-            <button class="closeBtn" ><i class='bx bx-x' style='color:#f3e7e7'  ></i></button>
+            <button class="searchBtn"><i class='bx bx-search-alt' style='color:#f3e7e7'></i></button>
+            <button class="closeBtn"><i class='bx bx-x' style='color:#f3e7e7'></i></button>
+            <a href="/orders" class="ticketBtn">Cek Tiket Saya</a>
         </div>
     </nav>
+    
     @yield('content')
 
 

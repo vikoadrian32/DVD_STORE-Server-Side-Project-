@@ -16,6 +16,7 @@
             <tr>
                 <td>{{$stok->film->title}}</td>
                 <td>{{$stok->jumlah}} Pcs</td>
+                <td>Rp.{{$stok->price}}</td>
                 {{-- <td>{{$stok->harga}}$</td> --}}
                 <td>
                     <a href="/stok/update/{{$stok->id}}" class="btn btn-primary">Edit</a>

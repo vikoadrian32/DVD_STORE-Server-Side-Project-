@@ -17,4 +17,5 @@ class Detail extends Model
     {
         return $this->belongsTo(Film::class,'film_id','id');
     }
+    
 }

@@ -19,6 +19,10 @@
            <label for="quantity" style="color: aliceblue">Quantity :</label>
            <input type="number" name="quantity" class="form-control" value="{{ isset($stok) ? $stok?->jumlah : old('jumlah') }}" required>
         </div>
+        <div class="mb-3">
+           <label for="quantity" style="color: aliceblue">Price :</label>
+           <input type="text" name="price" class="form-control" placeholder="Ex : 100.000" value="{{ isset($stok) ? $stok?->price : old('price') }}" required>
+        </div>
      <div class="mb-3">
          <button type="submit" class="btn btn-success">Save</button>
          <a href="/stok" class="btn btn-warning">Cancel</a>

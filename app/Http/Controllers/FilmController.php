@@ -67,21 +67,21 @@ class FilmController extends Controller
         if($request->hasFile('video')){
         $video = $request->file('video');
         $filename = time(). '.' . $video->getClientOriginalExtension();
-        $destinationPath = public_path('/videos');
+        $destinationPath = public_path('videos');
         $video->move($destinationPath, $filename);
         $attribute->trailer = $filename;
         } 
         if ($request->hasFile('photo')) {
         $photo = $request->file('photo');
         $filename = time(). '.' . $photo->getClientOriginalExtension();
-        $destinationPath = public_path('/photos');
+        $destinationPath = public_path('photos');
         $photo->move($destinationPath, $filename);
         $attribute->poster = $filename;
         }
         if ($request->hasFile('thumbnail')) {
         $thumbnail = $request->file('thumbnail');
         $filename = time(). '.' . $thumbnail->getClientOriginalExtension();
-        $destinationPath = public_path('/thumbnails');
+        $destinationPath = public_path('thumbnails');
         $thumbnail->move($destinationPath, $filename);
         $attribute->thumbnail = $filename;
         }
@@ -96,7 +96,7 @@ class FilmController extends Controller
     }
 
     public function show(string $id){
-        $film = Film::with(['genres','attributes'])->find($id);
+        $film = Film::with(['genres','attributes','stok'])->find($id);
         return view('user/movie_detail',["films"=>$film]);
     }
     
@@ -109,6 +109,10 @@ class FilmController extends Controller
             return view("movie/movie_delete", ["film" => $film]);
         }
     }
+
+    
+
+    
     
 
 }
