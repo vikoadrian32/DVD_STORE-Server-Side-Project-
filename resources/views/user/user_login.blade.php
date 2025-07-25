@@ -17,7 +17,7 @@
             <div class="flip-card__inner">
               <div class="flip-card__front">
                 <div class="title">Log in</div>
-                <form class="flip-card__form" action="/login/account" method="post">
+                <form class="flip-card__form" action="/login" method="post">
                   @csrf
                   <input class="flip-card__input"  placeholder="Email" type="email" name="email">
                   <input class="flip-card__input" placeholder="Password" type="password" name="password">

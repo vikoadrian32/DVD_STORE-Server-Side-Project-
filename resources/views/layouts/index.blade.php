@@ -20,14 +20,21 @@
 </head>
 <body>
     <nav class="navigasi">
-        <a href="/home">MyMovie</a>
+        <a href="/home" class="brand">MyMovie</a>
         <div>
-            <input type="search" placeholder="Search " id="search">
+            <form action="/home" method="GET" onsubmit="return clearIfEmpty()">
+                <input type="search" placeholder="Search" name="search" id="search" value="{{ request('search') }}">
+            </form>
             <button class="searchBtn"><i class='bx bx-search-alt' style='color:#f3e7e7'></i></button>
             <button class="closeBtn"><i class='bx bx-x' style='color:#f3e7e7'></i></button>
+    
             <a href="/orders" class="ticketBtn">Cek Tiket Saya</a>
+    
+                <button type="submit" class="logoutBtn"><a href="/logout" class="nav-link text-light">Log-out</a></button>
+          
         </div>
     </nav>
+    
     
     @yield('content')
 

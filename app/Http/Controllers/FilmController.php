@@ -13,13 +13,23 @@ use Illuminate\Http\Request;
 
 class FilmController extends Controller
 {
-    public function index(){
-        $films = Film::with("attributes")->get();
-        return view('user/home',['films'=>$films]);
+    public function index(Request $request){
+        if ($request->has('search') && $request->search != '') {
+            $keyword = $request->search;
+            $films = Film::with("attribute")
+                ->where('title', 'like', "%$keyword%")
+                ->get();
+    
+            return view('user/home', ['films' => $films]);
+        }
+    
+        // Default: tanpa pencarian
+        $films = Film::with("attribute")->get();
+        return view('user/home', ['films' => $films]);
     }
     
     public function admin(){
-        $films = Film::with('genres',"attributes",'stok')->get();
+        $films = Film::with('genres',"attribute",'stok')->get();
         return view('admin/index',['films'=>$films]);
     }
 
@@ -96,7 +106,7 @@ class FilmController extends Controller
     }
 
     public function show(string $id){
-        $film = Film::with(['genres','attributes','stok'])->find($id);
+        $film = Film::with(['genres','attribute','stok'])->find($id);
         return view('user/movie_detail',["films"=>$film]);
     }
     

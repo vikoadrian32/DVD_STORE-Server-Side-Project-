@@ -4,83 +4,382 @@
     box-sizing: border-box;
     
 }
+body{
+    padding-top: 150px;
+}
 
-
-.navigasi{
+/* Navigation */
+.navigasi {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
-    padding: 15px;
-    /* position: relative; */
+    padding: 15px 30px;
     align-items: center;
     justify-content: space-between;
-    z-index: 2;
-    backdrop-filter: blur(2px);
-    background: linear-gradient(to right, rgba(0, 0, 0,1),rgba(0, 0, 0,1),rgba(0,0,0,.6),rgba(0,0,0,.6));
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+    background: linear-gradient(90deg, 
+        rgba(0, 0, 0, 0.9) 0%, 
+        rgba(0, 0, 0, 0.8) 50%, 
+        rgba(0, 0, 0, 0.6) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.navigasi::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        rgba(140, 17, 17, 0.1) 0%, 
+        transparent 50%, 
+        rgba(140, 17, 17, 0.1) 100%);
+    z-index: -1;
 }
 
 .navigasi a {
     text-decoration: none;
-    margin: 0 10px;
-    font-size: 2.5em; /* 2.5 x 16 = 40px */
-    font-weight: bold;
-    font-family: "Jersey 25 Charted", sans-serif;
+    margin: 0 15px;
+    font-size: 2.2em;
     font-weight: 400;
-    font-style:normal;
-    color: rgba(140, 17, 17, 0.863);
+    /* font-family: "Jersey 25 Charted", sans-serif; */
+    color: #e74c3c;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
 }
-.navigasi div{
+
+.backBtn {
+    background-color: transparent;
+    border: none;
+    color: #f3e7e7;
+    font-size: 16px;
+    cursor: pointer;
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
-
-.poster h3{
-    /* margin-top: 20px; */
-    color: wheat;
-    margin-top: 20px; 
+.navigasi a:hover {
+    color: #ff6b6b;
+    text-shadow: 0 0 20px rgba(231, 76, 60, 0.8);
+    transform: scale(1.05);
 }
 
-#search{
-    width: 400px;
-    height: 35px;
-    text-align: center;
-    font-size: 1.2em;
-    border: 1px solid grey;
+.navigasi div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Search Bar */
+#search {
+    width: 350px;
+    height: 40px;
+    padding: 0 20px;
+    font-size: 1.1em;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     color: white;
     outline: none;
-    border-radius: 10px;
-    background:transparent;
-    display:none;  /* 'None' Agar Search Bar Tidak Terlihat Sebelum icon Search Di klik */
-    
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    display: none;
+    transition: all 0.3s ease;
 }
-.closeBtn{
+
+#search:focus {
+    border-color: #e74c3c;
+    box-shadow: 0 0 20px rgba(231, 76, 60, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+#search::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.searchBtn, .closeBtn {
     background: none;
-    border: none; 
-    font-size: 2em; /*element button tidak berada dalam div sedangkan element a berada di dalam nav oleh
-    karna itu font size relatif terhadap parent nya (em) sehingga 2 x 16(nilai default) =  32 px*/
-    margin: 0 20px;
+    border: none;
+    font-size: 1.8em;
+    color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
-    display:none;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
 }
-.searchBtn{
-    background: none;
-    border: none; 
-    font-size: 2em;
-    margin: 0 20px;
-    cursor: pointer;
+
+.searchBtn:hover, .closeBtn:hover {
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+    transform: scale(1.1);
 }
-input[type="search"]::-webkit-search-cancel-button{
+
+.closeBtn {
     display: none;
 }
-
-
-
-
-
-.title_movie{
+  /* Modal Overlay */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 65%;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal Container */
+.modal-container {
+    background: linear-gradient(145deg, #1e1e3f, #2a2a5a);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    transform: scale(0.8) translateY(50px);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-overlay.active .modal-container {
+    transform: scale(1) translateY(0);
+}
+
+/* Animated Background */
+.modal-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* Close Button */
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+}
+
+/* Modal Header */
+.modal-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.modal-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 2.5rem;
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #fff, #ddd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.modal-subtitle {
+    color: #ccc;
+    font-size: 1rem;
+}
+
+/* Order Summary */
+.order-summary {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #ff6b6b;
+}
+
+.summary-label {
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.summary-value {
+    font-weight: 600;
+    color: white;
+}
+
+/* Action Buttons */
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    flex: 1;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+
+.btn-confirm {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: white;
+    margin-top: 40px;
+    box-shadow: 0 8px 25px rgba(238, 90, 36, 0.3);
+}
+
+.btn-confirm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(238, 90, 36, 0.4);
+}
+
+/* Success Modal Styles */
+.modal-container.success .modal-icon {
+    background: linear-gradient(135deg, #00b894, #00a085);
+}
+
+.modal-container.error .modal-icon {
+    background: linear-gradient(135deg, #e17055, #d63031);
+}
+
+/* Demo Button */
+.demo-btn {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(108, 92, 231, 0.3);
+}
+
+.demo-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(108, 92, 231, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modal-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+    
+    .modal-title {
+        font-size: 1.5rem;
+    }
+}
+
+
+
+.showticket{
+    margin-left: 20px;
+}
+
+.title_movie{
+    display: flex;
+    position: absolute;
+    top: 150px;
+    right: 300px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-right: 20px;
 }
 
 .video_controls{
@@ -92,8 +391,8 @@ input[type="search"]::-webkit-search-cancel-button{
 }
 
 .video_controls video{
-    width: 800px;
-    margin-left: 100px;
+    width: 600px;
+    margin-left: 200px;
     object-fit: cover;
 }
 
@@ -107,7 +406,7 @@ input[type="search"]::-webkit-search-cancel-button{
 .btn{
     position: absolute;
     top: 20%;
-    left: 10%;
+    left: 20%;
     transform: translate(0%,-20%);
 }
 
@@ -115,7 +414,7 @@ input[type="search"]::-webkit-search-cancel-button{
     font-size: 60px;
     border: none;
     outline: none;
-    width: 800px;
+    width: 600px;
     height: 500px;
     /* min-height: 400px;
     max-height: 5000px; */
@@ -128,7 +427,7 @@ input[type="search"]::-webkit-search-cancel-button{
 #btn_pause {
     display: none;
     font-size: 60px;
-    width: 800px;
+    width: 600px;
     border: none;
     outline: none;
     height: 500px;

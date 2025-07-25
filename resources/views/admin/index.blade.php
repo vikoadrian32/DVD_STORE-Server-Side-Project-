@@ -7,9 +7,7 @@
     <div class="row ">
             @foreach ($films as $film)
             <div class="col-md-4 posterImg">
-              @foreach ($film->attributes as $item)
-              <img src="/photos/{{$item['poster']}}" class="rounded-4" >
-              @endforeach
+              <img src="/photos/{{$film->attribute->poster}}" class="rounded-4" >
                 <div class="info">
                     <p style="font-size: 25px;" >{{$film['title']}}</p>
                     <p style="font-weight: 400; font-size: 15px;">Director : {{$film['director']}}</p>

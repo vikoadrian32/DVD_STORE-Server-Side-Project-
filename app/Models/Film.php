@@ -20,9 +20,9 @@ class Film extends Model
         return $this->belongsToMany(Genre::class,'film_genres');
     }
     // 1 film bisa memiliki banyak attribute
-    public function attributes(): HasMany
+    public function attribute(): HasOne
     {
-        return $this->hasMany(Detail::class);
+        return $this->hasOne(Detail::class);
     }
     // 1 film hanya untuk 1 stok
     public function stok():HasOne

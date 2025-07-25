@@ -29,4 +29,14 @@ class OrderController extends Controller
        
        return redirect()->back()->with('success', 'Tiket berhasil dipesan!');
     }
+
+
+    public function getTicket(){
+        $userId = Auth::guard('accounts')->id(); // atau auth()->user()->id
+        $order = Order::with(['film.genres', 'film.attribute'])
+                       ->where('account_id', $userId)
+                       ->get();
+        return view('user/ticketView',['orders'=>$order]);
+    }
+
 }

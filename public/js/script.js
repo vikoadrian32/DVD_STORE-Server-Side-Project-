@@ -1,30 +1,23 @@
 let search = document.querySelector('#search');
 let icon = document.querySelector('.searchBtn');
 let iconClose = document.querySelector('.closeBtn');
+document.addEventListener("DOMContentLoaded", function() {
+    const detailElements = document.querySelectorAll('.detail');
 
-document.addEventListener("DOMContentLoaded", function() {  /**<= baris ini untuk mengeksekusi
-fungsi ketika dokumen html sudah dimuat sepenuhnya */
-  const detailElements = document.querySelectorAll('.detail'); /**<= baris ini mengambil semua element
-  yang memiliki class "detail" */
+    detailElements.forEach(function(detail) {
+        const sinopsis = detail.querySelector('.sinopsis');
+        const btnDetail = detail.querySelector('.btnDetail');
 
-  detailElements.forEach(function(detail) { /** <= Melakukan iterasi pada setiap element detail sebelumnya */
-      const sinopsis = detail.querySelector('.sinopsis'); /** <= mengambil element dengan class "sinopsis" */
-      const btnDetail = detail.querySelector('.btnDetail'); /** <= mengambil element dengan class "btnDetail" */
-
-      btnDetail.addEventListener('click', function() { /** <= Memberikan EventListener Ketika Button 
-      dengan class "btnDetail" di click */
-
-          if (sinopsis.style.maxHeight) { /** <= jika maxHeight sudah diatur maka  */
-              sinopsis.style.maxHeight = null; /** Mengubah maxHeight  menjadi null dengan begitu text akan terlihat
-              sepenuhnya */
-              btnDetail.textContent = 'See More'; /** Mengubah Text Button menjadi Close */
-          } else {  /** <= Jika maxHeight belum diatur maka  */
-            btnDetail.textContent = 'Close'; /** Mengubah text button menjadi See More */
-              sinopsis.style.maxHeight = sinopsis.scrollHeight + "px"; /** scrollHeight untuk memberikin 
-              tinggi sebenarnya dari element yang mungkin overflow */
-          }
-      });
-  });
+        btnDetail.addEventListener('click', function() {
+            if (sinopsis.classList.contains('expanded')) {
+                sinopsis.classList.remove('expanded');
+                btnDetail.textContent = 'See More';
+            } else {
+                sinopsis.classList.add('expanded');
+                btnDetail.textContent = 'Close';
+            }
+        });
+    });
 });
 
 // Apabila Icon Search Di klik maka :
@@ -84,3 +77,4 @@ videoArea.addEventListener('mouseleave',function(){
      buttonPauseIcon.style.display = "none";
  }, 5000); 
 })
+

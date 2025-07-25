@@ -184,3 +184,120 @@ document.addEventListener('DOMContentLoaded', function() {
     updateTotal();
     updateButtons();
 });
+
+function showOrderModal(movieData = null) {
+    const modal = document.getElementById('orderModal');
+    const quantity = parseInt(document.getElementById('quantityDisplay').innerText);
+    const price = parseInt(document.getElementById('pricePerTicket').dataset.price);
+    const dateInput = document.getElementById('ticket_date');
+    const date = dateInput.value;
+
+    // 🔒 Validasi: Pastikan tanggal dipilih
+    if (!date) {
+        alert("Please select a date before ordering.");
+        dateInput.focus(); // arahkan fokus ke input tanggal
+        return;
+    }
+
+    const total = quantity * price;
+
+    // Isi konten modal
+    document.getElementById('movieDate').textContent = date;
+    document.getElementById('ticketQuantity').textContent = `${quantity} ticket${quantity > 1 ? 's' : ''}`;
+    document.getElementById('totalPrice').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+
+    // Isi hidden input form
+    document.getElementById('hiddenQuantity').value = quantity;
+    document.getElementById('hiddenDate').value = date;
+    document.getElementById('hiddenTotal').value = total;
+
+    // Tampilkan modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+
+
+  function closeModal() {
+            const modal = document.getElementById('orderModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+    
+    }
+
+    function confirmOrder() {
+        closeModal();
+        
+        // Simulate API call
+        setTimeout(() => {
+            showSuccessModal();
+        }, 500);
+    }
+    function showSuccessModal() {
+        const modal = document.getElementById('successModal');
+        modal.classList.add('active');
+    }
+
+    function closeSuccessModal() {
+        const modal = document.getElementById('successModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    function showErrorModal(message = 'Something went wrong. Please try again.') {
+        const modal = document.getElementById('errorModal');
+        document.getElementById('errorMessage').textContent = message;
+        modal.classList.add('active');
+    }
+
+    function closeErrorModal() {
+        const modal = document.getElementById('errorModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    function retryOrder() {
+        closeErrorModal();
+        showOrderModal();
+    }
+
+    // Close modal when clicking outside
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal-overlay')) {
+            if (e.target.id === 'orderModal') closeModal();
+            if (e.target.id === 'successModal') closeSuccessModal();
+            if (e.target.id === 'errorModal') closeErrorModal();
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+            closeSuccessModal();
+            closeErrorModal();
+        }
+    });
+
+   
+
+    function confirmOrder() {
+        document.getElementById('orderForm').submit();
+        closeModal();
+            
+        // Simulate API call
+        setTimeout(() => {
+            showSuccessModal();
+        }, 500);
+    }
+
+    function showSuccessModal() {
+        const modal = document.getElementById('successModal');
+        modal.classList.add('active');
+    }
+
+    function closeSuccessModal() {
+        const modal = document.getElementById('successModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }

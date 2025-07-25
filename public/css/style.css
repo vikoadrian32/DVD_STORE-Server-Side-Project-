@@ -49,7 +49,7 @@ body {
     z-index: -1;
 }
 
-.navigasi a {
+.navigasi .brand {
     text-decoration: none;
     margin: 0 15px;
     font-size: 2.2em;
@@ -131,7 +131,7 @@ body {
 }
 
 .carousel-item img {
-    height: 70vh;
+    height: 100vh;
     object-fit: cover;
     filter: brightness(0.4) contrast(1.1);
 }
@@ -183,14 +183,17 @@ body {
 
 .detail p.sinopsis {
     width: 100%;
-    max-height: 60px;
+    max-height: 0; /* Awalnya tersembunyi */
     overflow: hidden;
     font-size: 1rem;
     line-height: 1.5;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 20px;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.5s ease-in-out; /* Animasi selama 0.5 detik */
+}
+.detail p.sinopsis.expanded {
+    max-height: 500px; /* Nilai cukup besar untuk menampung semua konten */
 }
 
 .btnDetail {
@@ -228,9 +231,22 @@ body {
 .ticketBtn:hover {
     background-color: #ddd;
 }
+.logoutBtn {
+    background-color: transparent;
+    color: #f3e7e7;
+    padding: 6px 12px;
+    border: 2px solid #f3e7e7;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-
-
+.logoutBtn:hover {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+}
 
 
 

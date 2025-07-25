@@ -62,9 +62,9 @@
         @foreach($films as $film)
         <div class="image">
             <a href="/film/show/{{$film->id}}">
-                @foreach ($film->attributes as $item)
-                <img src="/photos/{{$item->poster}}" >
-                @endforeach
+                {{-- @foreach ($film->attribute as $item) --}}
+                <img src="/photos/{{$film->attribute->poster}}" >
+                {{-- @endforeach --}}
                 <p class="title">{{$film->title}}</p>
             </a>
         </div>  
